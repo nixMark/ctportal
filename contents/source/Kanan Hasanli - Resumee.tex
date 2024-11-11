@@ -1,0 +1,552 @@
+\documentclass[10pt, letterpaper]{article}
+
+% Packages:
+\usepackage[
+  ignoreheadfoot, % set margins without considering header and footer
+  top=2 cm, % seperation between body and page edge from the top
+  bottom=2 cm, % seperation between body and page edge from the bottom
+  left=2 cm, % seperation between body and page edge from the left
+  right=2 cm, % seperation between body and page edge from the right
+  footskip=1.0 cm, % seperation between body and footer
+  % showframe % for debugging
+]{geometry} % for adjusting page geometry
+\usepackage{titlesec} % for customizing section titles
+\usepackage{tabularx} % for making tables with fixed width columns
+\usepackage{array} % tabularx requires this
+\usepackage[dvipsnames]{xcolor} % for coloring text
+\definecolor{primaryColor}{RGB}{0, 79, 144} % define primary color
+\usepackage{enumitem} % for customizing lists
+\usepackage{fontawesome5} % for using icons
+\usepackage{amsmath} % for math
+\usepackage[
+  pdftitle={Kanan Hasanli's CV},
+  pdfauthor={Kanan Hasanli},
+  pdfcreator={Kanan Hasanli with LaTeX},
+  colorlinks=true,
+  urlcolor=primaryColor
+]{hyperref} % for links, metadata and bookmarks
+\usepackage[pscoord]{eso-pic} % for floating text on the page
+\usepackage{calc} % for calculating lengths
+\usepackage{bookmark} % for bookmarks
+\usepackage{lastpage} % for getting the total number of pages
+\usepackage{changepage} % for one column entries (adjustwidth environment)
+\usepackage{paracol} % for two and three column entries
+\usepackage{ifthen} % for conditional statements
+\usepackage{needspace} % for avoiding page brake right after the section title
+\usepackage{iftex} % check if engine is pdflatex, xetex or luatex
+
+% Ensure that generate pdf is machine readable/ATS parsable:
+\ifPDFTeX
+\input{glyphtounicode}
+\pdfgentounicode=1
+% \usepackage[T1]{fontenc} % this breaks sb2nov
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+\fi
+
+% Some settings:
+\AtBeginEnvironment{adjustwidth}{\partopsep0pt} % remove space before
+% adjustwidth environment
+\pagestyle{empty} % no header or footer
+\setcounter{secnumdepth}{0} % no section numbering
+\setlength{\parindent}{0pt} % no indentation
+\setlength{\topskip}{0pt} % no top skip
+\setlength{\columnsep}{0cm} % set column seperation
+\makeatletter
+\let\ps@customFooterStyle\ps@plain % Copy the plain style to customFooterStyle
+% \patchcmd{\ps@customFooterStyle}{\thepage}{
+%     \color{gray}\textit{\small Kanan Hasanli - Page \thepage{} of
+% \pageref{LastPage}}
+% }{}{} % replace number by desired string
+\makeatother
+\pagestyle{customFooterStyle}
+
+\titleformat{\section}{\needspace{4\baselineskip}\bfseries\large}{}{0pt}{}[\vspace{1pt}\titlerule]
+
+\titlespacing{\section}{
+  % left space:
+  -1pt
+}{
+  % top space:
+  0.3 cm
+}{
+  % bottom space:
+  0.2 cm
+} % section title spacing
+
+\renewcommand\labelitemi{$\circ$} % custom bullet points
+\newenvironment{highlights}{
+  \begin{itemize}[
+        topsep=0.10 cm,
+        parsep=0.10 cm,
+        partopsep=0pt,
+        itemsep=0pt,
+        leftmargin=0.4 cm + 10pt
+      ]
+    }{
+  \end{itemize}
+} % new environment for highlights
+
+\newenvironment{highlightsforbulletentries}{
+  \begin{itemize}[
+        topsep=0.10 cm,
+        parsep=0.10 cm,
+        partopsep=0pt,
+        itemsep=0pt,
+        leftmargin=10pt
+      ]
+    }{
+  \end{itemize}
+} % new environment for highlights for bullet entries
+
+\newenvironment{onecolentry}{
+  \begin{adjustwidth}{
+      0.2 cm + 0.00001 cm
+    }{
+      0.2 cm + 0.00001 cm
+    }
+  }{
+  \end{adjustwidth}
+} % new environment for one column entries
+
+\newenvironment{twocolentry}[2][]{
+  \onecolentry
+  \def\secondColumn{#2}
+  \setcolumnwidth{\fill, 4.5 cm}
+  \begin{paracol}{2}
+  }{
+    \switchcolumn \raggedleft \secondColumn
+  \end{paracol}
+  \endonecolentry
+} % new environment for two column entries
+
+\newenvironment{header}{
+  \setlength{\topsep}{0pt}\par\kern\topsep\centering\linespread{1.5}
+}{
+  \par\kern\topsep
+} % new environment for the header
+
+% \newcommand{\placelastupdatedtext}{% \placetextbox{<horizontal
+%   % pos>}{<vertical pos>}{<stuff>}
+%   \AddToShipoutPictureFG*{% Add <stuff> to current page foreground
+%     \put(
+%       \LenToUnit{\paperwidth-2 cm-0.2 cm+0.05cm},
+%       \LenToUnit{\paperheight-1.0 cm}
+%     ){\vtop{{\null}\makebox[0pt][c]{
+%           \small\color{gray}\textit{Last updated in September
+%           2024}\hspace{\widthof{Last updated in September 2024}}
+%     }}}%
+%   }%
+% }%
+
+% save the original href command in a new command:
+\let\hrefWithoutArrow\href
+
+% new command for external links:
+\renewcommand{\href}[2]{\hrefWithoutArrow{#1}{\ifthenelse{\equal{#2}{}}{
+}{#2 }\raisebox{.15ex}{\footnotesize \faExternalLink*}}}
+
+\begin{document}
+\newcommand{\AND}{\unskip
+  \cleaders\copy\ANDbox\hskip\wd\ANDbox
+  \ignorespaces
+}
+\newsavebox\ANDbox
+\sbox\ANDbox{}
+
+% \placelastupdatedtext
+\begin{header}
+  \textbf{\fontsize{24 pt}{24 pt}\selectfont Kanan Hasanli}
+
+  \vspace{0.3 cm}
+
+  \normalsize
+  \mbox{{\color{black}\footnotesize\faMapMarker*}\hspace*{0.13cm}Frankfurt
+  am Main, Hessen, Germany}%
+  \kern 0.25 cm%
+%  \AND%
+%  \kern 0.25 cm%
+% \mbox{\hrefWithoutArrow{https://nixmark.github.io/}{\color{black}{\footnotesize\faLink}\hspace*{0.13cm}https://nixmark.github.io/}}%
+%  \kern 0.25 cm%
+  \AND%
+  \kern 0.25 cm%
+  \mbox{\hrefWithoutArrow{mailto:k.huseynxan@gmail.com}{\color{black}{\footnotesize\faEnvelope[regular]}\hspace*{0.13cm}k.huseynxan@gmail.com}}%
+  \kern 0.25 cm%
+  \AND%
+  \kern 0.25 cm%
+  \mbox{\hrefWithoutArrow{tel:+49 1522 239 86
+  96}{\color{black}{\footnotesize\faPhone*}\hspace*{0.13cm}01522 239 86 96}}%
+  \kern 0.25 cm%
+  \AND%
+  \kern 0.25 cm%
+  \mbox{\hrefWithoutArrow{https://linkedin.com/in/kanan-hasanli/}{\color{black}{\footnotesize\faLinkedinIn}\hspace*{0.13cm}kanan-hasanli}}%
+  \kern 0.25 cm%
+\end{header}
+
+\vspace{0.3 cm - 0.3 cm}
+
+\section{About me}
+
+\begin{onecolentry}
+  With over a decade of experience spanning telecom, financial
+  institutions, and storage providers, I offer a robust skill
+  set in cloud technologies (AWS, vSphere), Kubernetes (Rancher,
+  Tanzu, OCP), and automation (Ansible, Terraform).
+  Proficient in Linux system maintenance, monitoring, and application
+  release management with continuous delivery.
+  Deep understanding of enterprise infrastructure architecture.
+  Extensive experience with enterprise clients, ensuring
+  seamless integration of technical solutions. In my work I am
+  focusing on Automation via Infrastructure as a Code, GitOps and Security.
+\end{onecolentry}
+\vspace{0.20 cm}
+\section{Technologies}
+
+\begin{onecolentry}
+  \textbf{Linux:} RHEL, Ubuntu, CoreOS
+\end{onecolentry}
+
+% \vspace{0.15 cm}
+
+\begin{onecolentry}
+  \textbf{Cloud:} VMware vSphere, AWS
+\end{onecolentry}
+
+% \vspace{0.15 cm}
+
+\begin{onecolentry}
+  \textbf{Automation:} Ansible, Terraform, OpenTofu, cloud-init
+\end{onecolentry}
+
+% \vspace{0.15 cm}
+
+\begin{onecolentry}
+  \textbf{Kubernetes \& Containers:} OpenShift, Rancher, Tanzu,
+  Docker, Podman, Helm
+\end{onecolentry}
+
+% \vspace{0.15 cm}
+
+\begin{onecolentry}
+  \textbf{Storage:} PortWorx, PX-Backup, vSphere, AWS, Minio, velero, OCP OADP
+\end{onecolentry}
+
+% \vspace{0.15 cm}
+
+\begin{onecolentry}
+  \textbf{CI/CD:} Jenkins, TeamCity, GitHub Actions
+\end{onecolentry}
+
+% \vspace{0.15 cm}
+
+\begin{onecolentry}
+  \textbf{Monitoring \& Logging:} TICK Stack: Telegraf, Influx,
+  Chronograf, Kapacitor,
+  Grafana, Prometheus, ElasticSearch
+\end{onecolentry}
+
+% \vspace{0.15 cm}
+
+\begin{onecolentry}
+  \textbf{Documentation \& Diagramming:} AsciiDoc, Markdown, LaTeX, Docsify, UML
+\end{onecolentry}
+
+% \vspace{0.15 cm}
+
+\begin{onecolentry}
+  \textbf{Communication:} Postfix, Dovecot, Pigeonhole
+\end{onecolentry}
+
+% \vspace{0.15 cm}
+
+\begin{onecolentry}
+	\textbf{Security:} Vault, OpenLDAP
+\end{onecolentry}
+
+% \vspace{0.15 cm}
+
+\begin{onecolentry}
+  \textbf{Other Skills:} Git, GitOps, Microsoft SharePoint, Abbyy FlexiCapture,
+  ITIL, Agile, Scrum, multipass, kcli
+\end{onecolentry}
+% \vspace{0.15 cm}
+
+\section{Education}
+
+\begin{twocolentry}{
+
+  \textit{2014 – 2016}}
+  \textbf{Azerbaijan Technical University}
+
+  \textit{MSc in Computer Modeling}
+\end{twocolentry}
+
+\vspace{0.3 cm}
+
+\begin{twocolentry}{
+  \textit{2010 – 2014}}
+  \textbf{Azerbaijan Technical University}
+
+  \textit{BSc in Information Systems and Technologies}
+\end{twocolentry}
+
+\section{Experience}
+
+\begin{twocolentry}{
+		\textit{\color{white}\colorbox{black}{REDACTED}\\}
+		
+		\textit{\color{white}\colorbox{black}{REDACTED}\\}}
+	\textbf{Senior Systems Engineer}
+	
+	\textit{Hargreave-Rasch Biomedical}
+\end{twocolentry}
+
+\vspace{0.2 cm}
+
+\begin{onecolentry}
+	\begin{highlights}
+		\item  Analysis and design of secure Kubernetes(including
+		OpenShift, Rancher, Tanzu) Storage and Backup with and without encryption
+		\item  Deployment, Management and Maintenance of Storage Systems
+		\item  Connecting Portworx to existing monitoring solution or
+		setting up Prometheus and Grafana
+		\item  Automation of deployment with Ansible and Terraform and
+		building CI/CD pipelines
+		\item  Configuration of Storage backend with vSphere, AWS, Minio
+		\item  Writing documentation for installation, 2nd day operations
+		and maintenance using Word, Markdown and AsciiDoc
+		\item  Operated multitude of machines with different flavors of Linux(RHEL, Ubuntu, CoreOS)
+		\item  Wrote code for a certain \color{white}\colorbox{black}{REDACTED}\color{black} Suit project and its successor \color{white}\colorbox{black}{REDACTED}\color{black} Suit 2.0 project 
+	\end{highlights}
+\end{onecolentry}
+
+\vspace{0.3 cm}
+
+\begin{twocolentry}{
+    \textit{Frankfurt, Germany}
+
+  \textit{Oct 2022 – Jun 2024}}
+  \textbf{Senior Delivery Engineer}
+
+  \textit{Pure Storage}
+\end{twocolentry}
+
+\vspace{0.2 cm}
+
+\begin{onecolentry}
+  \begin{highlights}
+  \item  Analysis and design of secure Kubernetes(including
+    OpenShift, Rancher, Tanzu) Storage and Backup with and without encryption
+  \item  Deployment of Portworx and PX-Backup with necessary design
+  \item  Connecting Portworx to existing monitoring solution or
+    setting up Prometheus and Grafana
+  \item  Automation of deployment with Ansible and Terraform and
+    building CI/CD pipelines
+  \item  Configuration of Storage backend with vSphere, AWS, Minio
+  \item  Writing documentation for installation, 2nd day operations
+    and maintenance using Word, Markdown and AsciiDoc
+  \item  Working with different flavours of Linux(RHEL, Ubuntu, CoreOS)
+  \item  Conducting PoCs of software and platforms
+  \end{highlights}
+\end{onecolentry}
+
+\vspace{0.3 cm}
+
+\begin{twocolentry}{
+    \textit{Frankfurt, Germany}
+
+  \textit{Aug 2019 – Oct 2022}}
+  \textbf{Site Reliability Engineer}
+
+  \textit{Deutsche Boerse}
+\end{twocolentry}
+
+\vspace{0.2 cm}
+\begin{onecolentry}
+  \begin{highlights}
+  \item Deployment, support and maintenance of HA Production and
+    non-Production OpenShift/Kubernetes clusters
+  \item Support of VM based applications
+  \item Work with vSphere to support and maintain VMs and integrations
+  \item Automation of processes with Ansible and Terraform
+  \item Documentation of existing procedures and automations
+  \item Conducting PoCs of software and platforms
+  \item Containerization of non in-house software
+  \item Communication with client for acquiring specifications and
+    requirements for demands- Systems optimization according to needs
+    and purposes of applications
+  \item ITIL based process management
+  \item Repository, Package and Artifact management with GitOps
+  \item Planning and design of infrastructure architecture
+  \end{highlights}
+\end{onecolentry}
+
+\vspace{0.3 cm}
+
+\begin{twocolentry}{
+    \textit{Prague, Czech Republic}
+
+  \textit{Dec 2017 – Jul 2019}}
+  \textbf{Senior Systems Engineer}
+
+  \textit{EPAM Systems}
+\end{twocolentry}
+
+\vspace{0.2 cm}
+\begin{onecolentry}
+  \begin{highlights}
+  \item Release management for UAT/Staging/Production environments
+    for C++, C\#, and Java applications
+  \item Migration of Legacy applications to newer servers, and
+    dependency resolution
+  \item Management of applications running on Linux and Windows servers
+  \item Automated development with Nolio deployment system
+  \item Repository, Package and Artifact management with Git,
+    Perforce, Nexus, Nuget
+  \item Powershell scripts for automating the processes
+  \item Queue Management with IBM MQ
+  \item Systems optimization according to needs and purposes of applications
+  \item ITIL based process management
+  \item Automate server provisioning using Chef.
+  \end{highlights}
+\end{onecolentry}
+
+\vspace{0.3 cm}
+
+\begin{twocolentry}{
+    \textit{Remote}
+
+  \textit{Apr 2017 – Dec 2017}}
+  \textbf{DevOps Engineer}
+
+  \textit{Decision Mapper}
+\end{twocolentry}
+
+\vspace{0.2 cm}
+\begin{onecolentry}
+  \begin{highlights}
+  \item Setup and maintenance of Monitoring and Logging Solutions
+    like, ElasticSearch and Prometheus for infrastructure wide observability.
+  \item Deployment of on premise or GCE/Azure clusters, with
+    Docker/Docker Swarm, Kubernetes, OpenShift.
+  \item Contribute to the authoring of several automation tools
+    including templating agents for package managers (PIP,
+    Chocolatey), provisioning scripts, and an automation client used
+    by all teams to create and execute functional test scripts (python).
+  \item Create and maintain software build and deployment pipelines
+    using Jenkins.
+  \item Maintain Jenkins jobs which serve as both builds and task
+    runners for tooling.
+  \item Work with development teams on transitioning to a Continuous
+    Delivery process with automated build, test, and deployment.
+  \item Perform software releases to production and other client
+    facing environments.
+  \item Collaborate with development and other technology teams on
+    requirements definition, capacity planning, and process refinement.
+  \item Adhere to existing operational processes and maintain
+    operational documentation.
+  \end{highlights}
+\end{onecolentry}
+
+\vspace{0.3 cm}
+
+\begin{twocolentry}{
+    \textit{Baku, Azerbaijan}
+
+  \textit{Dec 2015 – Dec 2017}}
+  \textbf{System Engineer}
+
+  \textit{Nar Mobile}
+\end{twocolentry}
+
+\vspace{0.2 cm}
+\begin{onecolentry}
+  \begin{highlights}
+  \item Management of all phases of the business applications
+    projects preparation lifecycle, gather inital business
+    requirements, create requests for proposal and evaluation parts.
+  \item Development of quality software tools and products based on
+    requirements from business customers.
+  \item Administration of existing informational systems and tools in
+    accordance with corporate standards and ITIL practices.
+  \item Works with QA Team to ensure appropriate quality level of
+    software tools to release.
+  \item Provides assistance for the Business Customer to establish or
+    evaluate existing business requirements.
+  \end{highlights}
+\end{onecolentry}
+
+\vspace{0.3 cm}
+
+\begin{twocolentry}{
+    \textit{Baku, Azerbaijan}
+
+  \textit{Feb 2013 - Dec 2015}}
+  \textbf{Application Monitoring Engineer}
+
+  \textit{Nar Mobile}
+\end{twocolentry}
+
+\vspace{0.2 cm}
+\begin{onecolentry}
+  \begin{highlights}
+  \item Monitor Systems: Track infrastructure, applications, and
+    networks for performance and availability issues.
+  \item Incident Response: Detect, troubleshoot, and escalate system
+    incidents to ensure quick resolution.
+  \item Automate Monitoring: Build scripts and tools for automated
+    alerting and monitoring processes.
+  \item Report Performance: Generate system performance reports and
+    suggest optimizations.
+  \item Collaborate Cross-Team: Work with IT and DevOps to align
+    monitoring with operational goals.
+  \end{highlights}
+\end{onecolentry}
+
+\vspace{0.3 cm}
+
+\begin{twocolentry}{
+    \textit{Baku, Azerbaijan}
+
+  \textit{Nov 2010 – Feb 2013}}
+  \textbf{System Adminitrator}
+
+  \textit{Azerbaijan Technical University}
+\end{twocolentry}
+
+\vspace{0.2 cm}
+\begin{onecolentry}
+  \begin{highlights}
+  \item Supporting local and international staff as an IT support team member
+  \item Receiving requests, solving \& escalating problems
+  \item Second and Third end\-line user support
+  \item Remote assistance
+  \item Performing diagnostic and security procedures
+  \item Performing data backup \& recover procedures
+  \item Performing hardware diagnostics
+  \item Preparing(installing) and re-installing OS and necessary programs
+  \item Maintaining office equipment including managing and deploying
+    consumables (copiers, fax machines, printers)
+  \item Setting up presentations, exhibitions and providing IT
+    support on other performances
+  \item Setting up terminal clients \& and upgrading firmware
+  \end{highlights}
+\end{onecolentry}
+\vspace{0.20 cm}
+\section{Languages}
+\begin{onecolentry}
+  \textbf{Azerbaijani:} Native
+\end{onecolentry}
+\begin{onecolentry}
+  \textbf{English:} Fluent
+\end{onecolentry}
+\begin{onecolentry}
+  \textbf{Russian:} Fluent
+\end{onecolentry}
+\begin{onecolentry}
+  \textbf{Turkish:} Fluent
+\end{onecolentry}
+\begin{onecolentry}
+  \textbf{German:} A2 \textit{(on the path to get B1 and B2)}
+\end{onecolentry}
+\end{document}

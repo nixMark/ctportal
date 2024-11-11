@@ -1,0 +1,27 @@
+\documentclass[a5paper,12pt]{letter}
+\usepackage[landscape]{geometry} % Sets the page orientation to landscape
+\usepackage{hyperref}
+\usepackage{fontspec}
+\usepackage{fontspec}
+\usepackage{xcolor}
+\usepackage{nopageno} 
+\pagenumbering{gobble}
+\address{Hargreave-Rasch Biomedical \\}
+% \date{}
+
+\begin{document}
+	\begin{letter}{} % Recipient field should be provided, even if empty
+		
+		{\fontspec{Penlike}\fontsize{13pt}{13.8pt}\selectfont 
+			He was OK. Helped me with my \colorbox{black}{REDACTED} scanner. 
+			\color{white}This man is freaking me out. He may be working for Karl, for C.E.L.L. or someone else. I am not sure. Believe me this is not paranoia. \color{black} % Explicitly set color back to black
+		}
+		
+		\closing{
+			\vspace{5ex} % Adds space above the closing
+			{\fontspec{Holligate Signature Demo}\fontsize{20pt}{16.8pt}\selectfont Nathan Gould} \\[2ex]
+%			Biotechnologist \\
+			\colorbox{black}{REDACTED} % Ensures text is visible on black background
+		}
+	\end{letter}
+\end{document}

@@ -1,0 +1,73 @@
+\documentclass[a4paper,12pt]{article}
+\usepackage{geometry}
+\usepackage{fontspec}
+\usepackage{graphicx}
+\usepackage{setspace}
+\usepackage{fancyhdr}
+\usepackage{nopageno}
+
+% Set margins for A4 document
+\geometry{top=2.5cm, bottom=2.5cm, left=2.5cm, right=2.5cm}
+
+% Set the main font to Ruda
+\setmainfont{Ruda}
+
+% Setup fancyhdr for the footer
+\pagestyle{fancy}
+\fancyhf{} % Clear all headers and footers
+\fancyfoot[C]{\small This document is classified under U.S. Military Jurisdiction and may not be reproduced or distributed without permission.}
+
+\pagenumbering{gobble} % Removes page numbers
+
+\begin{document}
+	
+	% Header with centered title and top-right photo
+	\noindent
+	\begin{minipage}{0.7\textwidth}
+		\begin{center}
+			{\LARGE \textbf{United States Navy Military Police}}\\
+			\vspace{0.5cm}
+			{\Large Official Clearance Document}
+		\end{center}
+	\end{minipage}%
+	\hfill
+	\begin{minipage}{0.25\textwidth}
+		\begin{flushright}
+			\raisebox{0cm}{\includegraphics[width=4cm, height=5.5cm]{photo.png}} % Replace "photo.jpg" with your image file
+		\end{flushright}
+	\end{minipage}
+	
+	\vspace{1cm}
+	
+	\noindent \textbf{To Whom It May Concern:}
+	
+	\vspace{0.5cm}
+	
+	This document certifies that \textbf{Kanan Hasanli}, formerly employed at \textit{Hargreave-Rasch Biomedical}, has undergone all necessary evaluations and security screenings required by the United States Navy Military Police. The subject has been \textbf{cleared and authorized} to engage in civilian or military work following the conclusion of his role at Hargreave-Rasch Biomedical.
+	
+	\vspace{0.5cm}
+	
+	This clearance is issued under strict compliance with all U.S. Navy protocols and in alignment with national security guidelines. All classified data and sensitive information previously accessible to the subject have been secured and debriefed according to U.S. military standards.
+	
+	\vspace{1cm}
+	
+	\textbf{Authorization Details:}
+	\begin{itemize}
+		\item \textbf{Status:} Cleared for Civilian and Military Employment
+		\item \textbf{Effective Date:} 01 November 2024
+		\item \textbf{Issued by:} U.S. Navy Military Police Command
+	\end{itemize}
+	
+	\vspace{0.5cm}
+	
+	\noindent \textbf{Note:} Any unauthorized disclosure of sensitive information, intentional or unintentional, will be subject to penalties as per U.S. military regulations. This clearance can be validated here \textbf{https://nixmark.github.io/ctportal/} is valid until further notice or revocation by the U.S. Navy Military Police Command.
+	
+	\vspace{1cm}
+	
+	\begin{center}
+		\textbf{Authorized Officer:} \\[1ex]
+		{\fontsize{12pt}{14pt}\selectfont \textsf{Major Jack Reacher}} \\
+		U.S. Navy Military Police Command
+	\end{center}
+	
+\end{document}
